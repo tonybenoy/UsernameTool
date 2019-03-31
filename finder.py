@@ -29,7 +29,7 @@ def response(host,username,verbose,nolog):
             file = open(fileloc,"a") 
             file.write(str(datetime.datetime.now()) + " " + host + username + " " + ("Unavailable" if str(conn.getcode()) == "200"  else "Error!")) 
             file.close()
-        return "Unavailable" if str(conn.getcode()) == "200"  else "Error! Run again with -v to check respose"
+        return host+" "+"Unavailable" if str(conn.getcode()) == "200"  else "Error! Run again with -v to check respose"
     except Exception as e:
         if verbose:
             print("Url checked : " + host + username +" " + str(e))
@@ -37,7 +37,7 @@ def response(host,username,verbose,nolog):
             file = open(fileloc,"a") 
             file.write(str(datetime.datetime.now()) + " "+ host + username + " " + ("Available" if str(e)[11:14] == "404" else "Error!")) 
             file.close()
-        return "Available" if str(e)[11:14] == "404" else "Error! Run again with -v to check respose"
+        return host+" "+"Available" if str(e)[11:14] == "404" else "Error! Run again with -v to check respose"
 
 parser =  argparse.ArgumentParser(description="Tool to find if username exists.")
 parser.add_argument("-H", "--host", type=str, help="Host to check the username in.")
